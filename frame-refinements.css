@@ -1,0 +1,109 @@
+/* Scoped refinements: fixed bottom ribbon and hero image frame only. */
+.hero-frame {
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+}
+.hero-frame .hero-scene {
+  clip-path: none;
+  border-radius: 0;
+}
+
+/* Match the existing .wrap width, rather than the entire browser window. */
+.ribbon {
+  left: 50%;
+  right: auto;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(1220px, 89%);
+  max-width: 100%;
+  padding: 38px 28px max(16px, env(safe-area-inset-bottom));
+  background: #f7f5ed;
+  color: #131510;
+  isolation: isolate;
+}
+.ribbon .ribbon-inner.wrap {
+  width: 100%;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 145px minmax(0, 1fr) minmax(0, 170px) auto;
+  gap: 20px;
+  align-items: center;
+}
+.ribbon .ribbon-inner > * { min-width: 0; }
+.ribbon .footer-brand {
+  display: block;
+  width: 145px;
+  max-width: 100%;
+  padding: 0;
+  background: transparent;
+}
+html[data-theme] .ribbon .footer-brand img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1650 / 467;
+  object-fit: contain;
+  filter: none;
+}
+.ribbon .ribbon-copy { display: block; }
+.ribbon .ribbon-copy p,
+.ribbon .ribbon-copy small { overflow-wrap: anywhere; }
+.ribbon .ribbon-contact {
+  display: flex;
+  flex-direction: column;
+  padding-left: 18px;
+  overflow-wrap: anywhere;
+}
+.ribbon .ribbon-contact button { white-space: normal; }
+.ribbon .button {
+  width: auto;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 12px 17px;
+  gap: 14px;
+  white-space: normal;
+  text-align: center;
+  justify-self: end;
+}
+.ribbon .button span { flex: 0 0 auto; }
+
+@media (min-width: 1600px) {
+  .ribbon { width: min(1440px, 88%); }
+}
+@media (max-width: 1100px) {
+  .ribbon .ribbon-inner.wrap {
+    grid-template-columns: 130px minmax(0, 1fr) auto;
+    gap: 12px 20px;
+  }
+  .ribbon .footer-brand { width: 130px; }
+  .ribbon .ribbon-copy { grid-column: 2; grid-row: 1; }
+  .ribbon .ribbon-contact {
+    grid-column: 2;
+    grid-row: 2;
+    border-left: 0;
+    padding-left: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+  }
+  .ribbon .footer-brand,
+  .ribbon .button { grid-row: 1 / span 2; }
+  .ribbon .button { grid-column: 3; }
+}
+@media (max-width: 700px) {
+  .ribbon { padding: 31px 18px max(12px, env(safe-area-inset-bottom)); }
+  .ribbon .ribbon-inner.wrap {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: 10px 14px;
+  }
+  .ribbon .footer-brand { grid-column: 1; grid-row: 1; width: 112px; }
+  .ribbon .button { grid-column: 2; grid-row: 1; padding: 10px 12px; gap: 8px; }
+  .ribbon .ribbon-copy { grid-column: 1 / -1; grid-row: 2; }
+  .ribbon .ribbon-copy p { margin: 0; }
+  .ribbon .ribbon-copy small { display: none; }
+  .ribbon .ribbon-contact { grid-column: 1 / -1; grid-row: 3; justify-content: space-between; }
+}
+@media (max-width: 360px) {
+  .ribbon { width: 90%; padding-inline: 14px; }
+  .ribbon .footer-brand { width: 99px; }
+}
